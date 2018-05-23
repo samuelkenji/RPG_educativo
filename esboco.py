@@ -2,7 +2,7 @@ from time import time
 import random
 import operator
 
-pontuacao=1000
+pontuacao=100
 
 lista=[]
 
@@ -55,14 +55,13 @@ def quiz(pontuacao):
         print('Resposta certa!')
     else:
         print('Resposta errada')
-    return pontuacao_total
+    lista.insert(2, pontuacao_total)
 
 def facil():
     for _ in range(1):
         questao_facil()
         quiz(pontuacao)
-        print(lista[0])
-        print(int(pontuacao_total))
+        print(int(lista[2]))
 
 def medio():
     for _ in range(2):
