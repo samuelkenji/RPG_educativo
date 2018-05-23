@@ -2,20 +2,31 @@ from time import time
 import random
 import operator
 
-pontuacao=100
+pontuacao=500
+pontuacao_final=0
 
 lista=[]
 
-operacoes=[
+operacoes_facil=[
+    ('+', operator.add),
+    ('-', operator.sub)
+]
+
+operacoes_medio=[
     ('+', operator.add),
     ('-', operator.sub),
     ('*', operator.mul),
     ('/', operator.floordiv),
 ]
 
+operacoes_dificil=[
+    ('*', operator.mul),
+    ('/', operator.floordiv),
+]
+
 def questao_facil():
     global lista
-    op_op, op_res=random.choice(operacoes)
+    op_op, op_res=random.choice(operacoes_facil)
     n1=random.randint(1,20)
     n2=random.randint(1,20)
     if n1>n2:
@@ -29,17 +40,18 @@ def questao_facil():
 
 
 def questao_media():
-    op_op, op_res = random.choice()
-    n1 = random.randint(1, 100)
-    n2 = random.randint(1, 100)
+    global lista
+    op_op, op_res = random.choice(operacoes_medio)
+    n1 = random.randint(1, 50)
+    n2 = random.randint(1, 10)
     quest = '{}{}{}'.format(n1, op_op, n2)
     res = op_res(n1, n2)
     return quest, res
 
 def questao_dificil():
     op_op, op_res = random.choice()
-    n1 = random.randint(1, 250)
-    n2 = random.randint(1, 250)
+    n1 = random.randint(1, 50)
+    n2 = random.randint(1, 25)
     quest = '{}{}{}'.format(n1, op_op, n2)
     res = op_res(n1, n2)
     print (res)
@@ -57,11 +69,12 @@ def quiz(pontuacao):
         print('Resposta errada')
     lista.insert(2, pontuacao_total)
 
-def facil():
-    for _ in range(1):
+def facil(pontuacao_final):
+    for _ in range(2):
         questao_facil()
         quiz(pontuacao)
-        print(int(lista[2]))
+        pontuacao_final=pontuacao_final+lista[2]
+        print('Sua pontuação é de: ',int(pontuacao_final),'pontos')
 
 def medio():
     for _ in range(2):
@@ -80,7 +93,7 @@ def menu():
     while dificuldade<1 or dificuldade>3:
         dificuldade = int(input('Selecione a dificuldade:\n1 - Fácil\n2 - Médio\n3 - Difícil'))
     if dificuldade==1:
-        facil()
+        facil(pontuacao_final)
     elif dificuldade==2:
         medio()
     elif dificuldade==3:
