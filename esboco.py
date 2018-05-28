@@ -16,12 +16,10 @@ operacoes_medio=[
     ('+', operator.add),
     ('-', operator.sub),
     ('*', operator.mul),
-    ('/', operator.floordiv),
 ]
 
 operacoes_dificil=[
     ('*', operator.mul),
-    ('/', operator.floordiv),
 ]
 
 def questao_facil():
@@ -46,46 +44,65 @@ def questao_media():
     n2 = random.randint(1, 10)
     quest = '{}{}{}'.format(n1, op_op, n2)
     res = op_res(n1, n2)
-    return quest, res
+    lista.insert(0,quest)
+    lista.insert(1,res)
 
 def questao_dificil():
-    op_op, op_res = random.choice()
+    op_op, op_res = random.choice(operacoes_dificil)
     n1 = random.randint(1, 50)
     n2 = random.randint(1, 25)
     quest = '{}{}{}'.format(n1, op_op, n2)
     res = op_res(n1, n2)
-    print (res)
-    return quest, res
+    lista.insert(0,quest)
+    lista.insert(1,res)
+    print(res)
 
 def quiz(pontuacao):
     print('Quanto é {}'.format(lista[0]))
     t0=time()
-    res_jogador=int(input('Digite a resposta: '))
+    res_jogador=float(input('Digite a resposta: '))
     tf=time()-t0
     pontuacao_total=0+(pontuacao-tf)
     if lista[1]==res_jogador:
         print('Resposta certa!')
+        pontuacao_total=0+(pontuacao-tf)
     else:
         print('Resposta errada')
+        pontuacao_total=0
     lista.insert(2, pontuacao_total)
 
 def facil(pontuacao_final):
-    for _ in range(2):
-        questao_facil()
-        quiz(pontuacao)
-        pontuacao_final=pontuacao_final+lista[2]
-        print('Sua pontuação é de: ',int(pontuacao_final),'pontos')
+    while True:
+        for _ in range(5):
+            questao_facil()
+            quiz(pontuacao)
+            pontuacao_final=pontuacao_final+lista[2]
+            print('Sua pontuação é de: ',int(pontuacao_final),'pontos')
+        cont=input('Deseja continuar?(s/n) ').upper()
+        if cont=='N':
+            break
 
-def medio():
-    for _ in range(2):
-        questao_media()
-        quiz(quest, res, pontuacao_total)
-
-
-def dificil():
-    for _ in range(3):
-        questao_dificil()
-        quiz(quest, res, pontuacao_total)
+def medio(pontuacao_final):
+    while True:
+        for _ in range(5):
+            questao_media()
+            quiz(pontuacao)
+            pontuacao_final=pontuacao_final+lista[2]
+            print('Sua pontuação é de: ',int(pontuacao_final),'pontos')
+        cont=input('Deseja continuar?(s/n) ').upper()
+        if cont=='N':
+            break
+            
+def dificil(pontuacao_final):
+    while True:
+        for _ in range(5):
+            questao_dificil()
+            quiz(pontuacao)
+            pontuacao_final=pontuacao_final+lista[2]
+            print('Sua pontuação é de: ',int(pontuacao_final),'pontos')
+        cont=input('Deseja continuar?(s/n) ').upper()
+        if cont=='N':
+            break
 
 def menu():
     print('Bem-vindo ao jooj')
@@ -95,9 +112,9 @@ def menu():
     if dificuldade==1:
         facil(pontuacao_final)
     elif dificuldade==2:
-        medio()
+        medio(pontuacao_final)
     elif dificuldade==3:
-        dificil()
+        dificil(pontuacao_final)
 
 def main():
     menu()
