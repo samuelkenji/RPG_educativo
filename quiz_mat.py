@@ -1,4 +1,4 @@
-from time import time
+import time
 import random
 import operator
 
@@ -13,7 +13,6 @@ operacoes_facil = [
 ]
 
 operacoes_medio = [
-    ('+', operator.add),
     ('-', operator.sub),
     ('*', operator.mul),
 ]
@@ -62,9 +61,9 @@ def questao_dificil():
 
 def quiz(pontuacao):
     print('Quanto é {}'.format(lista[0]))
-    t0 = time()
+    t0 = time.time()
     res_jogador = float(input('Digite a resposta: '))
-    tf = time() - t0
+    tf = time.time() - t0
     pontuacao_total = 0 + (pontuacao - tf)
     if lista[1] == res_jogador:
         print('Resposta certa!')
@@ -81,9 +80,9 @@ def facil(pontuacao_final):
             questao_facil()
             quiz(pontuacao)
             pontuacao_final = pontuacao_final + lista[2]
-            print('Sua pontuação é de: ', int(pontuacao_final), 'pontos')
         cont = input('Deseja continuar?(s/n) ').upper()
         if cont == 'N':
+            print('Sua pontuação é de: ', int(pontuacao_final), 'pontos')
             break
 
 
@@ -93,9 +92,9 @@ def medio(pontuacao_final):
             questao_media()
             quiz(pontuacao)
             pontuacao_final = pontuacao_final + lista[2]
-            print('Sua pontuação é de: ', int(pontuacao_final), 'pontos')
         cont = input('Deseja continuar?(s/n) ').upper()
         if cont == 'N':
+            print('Sua pontuação é de: ', int(pontuacao_final), 'pontos')
             break
 
 
@@ -105,14 +104,13 @@ def dificil(pontuacao_final):
             questao_dificil()
             quiz(pontuacao)
             pontuacao_final = pontuacao_final + lista[2]
-            print('Sua pontuação é de: ', int(pontuacao_final), 'pontos')
         cont = input('Deseja continuar?(s/n) ').upper()
         if cont == 'N':
+            print('Sua pontuação é de: ', int(pontuacao_final), 'pontos')
             break
 
 
-def menu():
-    print('Bem-vindo ao jooj')
+def dif():
     dificuldade = int(input('Selecione a dificuldade:\n1 - Fácil\n2 - Médio\n3 - Difícil'))
     while dificuldade < 1 or dificuldade > 3:
         dificuldade = int(input('Selecione a dificuldade:\n1 - Fácil\n2 - Médio\n3 - Difícil'))
@@ -123,9 +121,33 @@ def menu():
     elif dificuldade == 3:
         dificil(pontuacao_final)
 
+def hist():
+    print('Você acorda num salão escuro')
+    time.sleep(3)
+    print('Sua cabeça está muito confusa')
+    time.sleep(3)
+    print('--> ???: Parece que nosso convidado finalmente acordou!')
+    time.sleep(3)
+    print('Vários holofotes acendem ao mesmo tempo, ofuscando sua vista')
+    time.sleep(3)
+    print('--> ???: Seja bem-vindo ao maior e melhor jogo de toda a história!')
+    time.sleep(3)
+    print('--> ???: Eu imagino que devem ter muitas perguntas passando na sua cabeça')
+    time.sleep(3)
+    print('--> ???: Mas não se preocupe, a única coisa que precisa saber sobre mim é que você pode me chamar de O Mestre')
+    time.sleep(3)
+    print('--> O Mestre: Sobre onde você está ... receio que não posso dizer')
+    time.sleep(3)
+    print('--> O Mestre: Porém, eu posso afirmar que esse é o jogo mais real que existe')
+    time.sleep(3)
+    print('--> O Mestre: Como eu sei que você já conhece as regras, não irei ser repetitivo')
+    time.sleep(3)
+    print('--> O Mestre: Então vamos ao jogo!')
+    time.sleep(0.5)
 
 def main():
-    menu()
+    #hist()
+    dif()
 
 
 main()
